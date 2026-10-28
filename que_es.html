@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Qué es? | CECyTO Vial</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #0b3d5c;
+            color: #fff;
+            min-height: 100vh;
+            
+        .back{
+            display: inline-block;
+            background: #ffb300;
+            color: #0b3d5c;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin: 20px;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .back:hover{
+            background: #ffd966;
+            transform: translateY(-3px);
+        }
+
+
+        }
+        .stripes { height: 12px; background: repeating-linear-gradient(90deg, #ffb300 0 40px, #fff 40px 80px); }
+        header { text-align: center; padding: 25px 20px 10px; }
+        header h1 { font-size: 2.2em; color: #ffd966; }
+        .back { display: inline-block; margin: 15px 20px; color: #ffd966; text-decoration: none; font-weight: bold; }
+        .back:hover { text-decoration: underline; }
+        .container { max-width: 900px; margin: 20px auto; padding: 0 20px; }
+        .card {
+            background: rgba(255,255,255,0.08);
+            border-left: 6px solid #ffb300;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .card h2 { color: #ffd966; margin-bottom: 10px; }
+        .card ul { padding-left: 20px; line-height: 1.8; }
+        .card li { margin-bottom: 5px; }
+        /* Pestañas interactivas */
+        .tabs { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+        .tab-btn {
+            background: #0077b6;
+            color: #fff;
+            border: 2px solid #ffb300;
+            padding: 10px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background .2s;
+        }
+        .tab-btn.active, .tab-btn:hover { background: #ffb300; color: #0b3d5c; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        footer { text-align: center; padding: 20px; color: #cce5ff; border-top: 2px solid #ffb300; margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <div class="stripes"></div>
+    <header>
+        <h1>ℹ️ ¿Qué es CECyTO Vial?</h1>
+    </header>
+    <a class="back" href="index.html">← Volver al inicio</a>
+
+    <div class="container">
+        <div class="card">
+            <p>CECyTO Vial es un proyecto educativo que busca fomentar la <strong>cultura vial</strong> y el respeto al <strong>reglamento de tránsito</strong> en Villa Victoria, Estado de México. A través de información clara y actividades interactivas, queremos que cada conductor y peatón conozca sus derechos y responsabilidades en la vía pública.</p>
+        </div>
+
+        <!-- Pestañas -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="mision">🎯 Misión</button>
+            <button class="tab-btn" data-tab="vision">🔭 Visión</button>
+            <button class="tab-btn" data-tab="objetivos">📋 Objetivos</button>
+            <button class="tab-btn" data-tab="beneficios">✅ Beneficios</button>
+        </div>
+
+        <div id="mision" class="tab-content card active">
+            <h2>🎯 Misión</h2>
+            <p>Informar, educar y concientizar a la comunidad de Villa Victoria sobre la importancia de la seguridad vial, promoviendo el respeto al reglamento de tránsito del Estado de México para reducir accidentes y salvar vidas.</p>
+        </div>
+
+        <div id="vision" class="tab-content card">
+            <h2>🔭 Visión</h2>
+            <p>Ser un referente educativo en cultura vial, logrando que cada habitante de Villa Victoria conduzca y transite de manera responsable, segura y respetuosa, contribuyendo a una movilidad más ordenada en el municipio.</p>
+        </div>
+
+        <div id="objetivos" class="tab-content card">
+            <h2>📋 Objetivos</h2>
+            <ul>
+                <li>Dar a conocer el reglamento de tránsito del Estado de México.</li>
+                <li>Promover el uso correcto del cinturón de seguridad y el casco.</li>
+                <li>Fomentar el respeto a los límites de velocidad y señales de tránsito.</li>
+                <li>Concientizar sobre los riesgos de manejar en estado de ebriedad.</li>
+                <li>Compartir datos curiosos y reales sobre la vialidad en la región.</li>
+            </ul>
+        </div>
+
+        <div id="beneficios" class="tab-content card">
+            <h2>✅ Beneficios</h2>
+            <ul>
+                <li>Reducción de accidentes viales en la comunidad.</li>
+                <li>Conductores y peatones más informados y responsables.</li>
+                <li>Mejor convivencia en las vialidades del municipio.</li>
+                <li>Jóvenes con mayor conciencia sobre su seguridad.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>📚 CECyTO Vial · Villa Victoria, Estado de México</p>
+    </footer>
+
+    <script>
+        // Pestañas interactivas
+        const btns = document.querySelectorAll('.tab-btn');
+        const contents = document.querySelectorAll('.tab-content');
+
+        btns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                btns.forEach(b => b.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

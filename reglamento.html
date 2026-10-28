@@ -1,0 +1,863 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reglamento | CECyTO Vial</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #0b3d5c;
+            color: white;
+            min-height: 100vh;
+        }
+
+        .stripes {
+            height: 12px;
+            background: repeating-linear-gradient(
+                90deg,
+                #ffb300 0 40px,
+                #fff 40px 80px
+            );
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px 15px;
+        }
+
+        header h1 {
+            font-size: clamp(1.7em, 4vw, 2.5em);
+            color: #ffd966;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #d9edff;
+        }
+
+        .back {
+            display: inline-block;
+            margin: 10px 20px;
+            color: #ffd966;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .presentacion {
+            text-align: center;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+        }
+
+        .rule-btn {
+            background: linear-gradient(145deg, #087eae, #005b96);
+            border: 2px solid #ffb300;
+            border-radius: 15px;
+            color: white;
+            padding: 22px 15px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .25s;
+            min-height: 125px;
+        }
+
+        .rule-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 7px 18px #ffb30055;
+            background: #087eae;
+        }
+
+        .icon {
+            display: block;
+            font-size: 2.3em;
+            margin-bottom: 10px;
+        }
+
+        .seccion {
+            display: none;
+            background: #ffffff12;
+            border: 1px solid #ffffff30;
+            border-left: 6px solid #ffb300;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .seccion h2 {
+            color: #ffd966;
+            margin-bottom: 18px;
+        }
+
+        #info-list {
+            padding-left: 25px;
+            line-height: 1.9;
+        }
+
+        #info-list li {
+            margin-bottom: 8px;
+        }
+
+        .btn {
+            background: #ffb300;
+            color: #0b3d5c;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 9px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            margin-right: 7px;
+        }
+
+        .btn:hover {
+            background: #ffd966;
+        }
+
+        .btn-secundario {
+            background: #087eae;
+            color: white;
+            border: 1px solid #ffd966;
+        }
+
+        .btn-eliminar {
+            background: #b83232;
+            color: white;
+            margin: 0;
+            padding: 8px 12px;
+        }
+
+        .formulario {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .campo {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .campo label {
+            color: #ffd966;
+            font-weight: bold;
+        }
+
+        .campo input,
+        .campo select,
+        .campo textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #83c9ed;
+            border-radius: 8px;
+            background: #f5fbff;
+            color: #12384c;
+            font-family: inherit;
+            font-size: 1em;
+        }
+.back{
+            display: inline-block;
+            background: #ffb300;
+            color: #0b3d5c;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin: 20px;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .back:hover{
+            background: #ffd966;
+            transform: translateY(-3px);
+        }
+        .campo textarea {
+            resize: vertical;
+            min-height: 85px;
+        }
+
+        .completo {
+            grid-column: 1 / -1;
+        }
+
+        .nota {
+            color: #d9edff;
+            font-size: .92em;
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+
+        .tabla-contenedor {
+            overflow-x: auto;
+            margin-top: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #ffffff0d;
+            min-width: 650px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ffffff35;
+            text-align: left;
+        }
+
+        th {
+            background: #087eae;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background: #ffffff0b;
+        }
+
+        .buscador {
+            margin-top: 20px;
+        }
+
+        .buscador input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #83c9ed;
+            font-size: 1em;
+        }
+
+        .contador {
+            color: #ffd966;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .mensaje {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            background: #005b96;
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px 15px;
+            color: #cce5ff;
+            border-top: 2px solid #ffb300;
+            margin-top: 35px;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 0 12px;
+            }
+
+            .seccion {
+                padding: 17px;
+            }
+
+            .rule-btn {
+                min-height: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stripes"></div>
+
+    <header>
+        <h1>🚦 CECyTO Vial</h1>
+        <p>Reglamento de Tránsito · Villa Victoria, Estado de México</p>
+    </header>
+
+    <a class="back" href="index.html">← Volver al inicio</a>
+
+    <main class="container">
+
+        <section id="inicioReglamento">
+            <div class="presentacion">
+                <h2 style="color:#ffd966;">📚 Aprende las reglas de tránsito</h2>
+                <p>Selecciona un tema para conocer sus principales recomendaciones.</p>
+            </div>
+
+            <div class="menu" id="menu">
+
+                <button class="rule-btn" data-rule="limites">
+                    <span class="icon">🚗</span>Límites de velocidad
+                </button>
+
+                <button class="rule-btn" data-rule="cinturon">
+                    <span class="icon">🪑</span>Cinturón de seguridad
+                </button>
+
+                <button class="rule-btn" data-rule="senalizacion">
+                    <span class="icon">🛑</span>Señales de tránsito
+                </button>
+
+                <button class="rule-btn" data-rule="alcohol">
+                    <span class="icon">🚫</span>Alcohol y manejo
+                </button>
+
+                <button class="rule-btn" data-rule="peatones">
+                    <span class="icon">🚶</span>Derechos del peatón
+                </button>
+
+                <button class="rule-btn" data-rule="sanciones">
+                    <span class="icon">⚠️</span>Sanciones
+                </button>
+
+                <button class="rule-btn" data-rule="semaforos">
+                    <span class="icon">🚦</span>Semáforos
+                </button>
+
+                <button class="rule-btn" data-rule="celular">
+                    <span class="icon">📱</span>Uso del celular
+                </button>
+
+                <button class="rule-btn" data-rule="motociclistas">
+                    <span class="icon">🏍️</span>Motociclistas
+                </button>
+
+                <button class="rule-btn" data-rule="estacionamiento">
+                    <span class="icon">🅿️</span>Estacionamiento
+                </button>
+
+                <button class="rule-btn" data-rule="documentos">
+                    <span class="icon">📄</span>Documentos obligatorios
+                </button>
+
+                <button class="rule-btn" data-rule="emergencias">
+                    <span class="icon">🚑</span>Vehículos de emergencia
+                </button>
+
+                <button class="rule-btn" data-rule="bicicletas">
+                    <span class="icon">🚲</span>Ciclistas
+                </button>
+
+                <button class="rule-btn" data-rule="seguridad">
+                    <span class="icon">🦺</span>Equipo de seguridad
+                </button>
+
+                <button class="rule-btn" data-rule="distancia">
+                    <span class="icon">↔️</span>Distancia entre vehículos
+                </button>
+
+                <button class="rule-btn" data-rule="lluvia">
+                    <span class="icon">🌧️</span>Conducir con lluvia
+                </button>
+
+                <button class="rule-btn" onclick="mostrarInfracciones()">
+                    <span class="icon">📋</span>Registro de infracciones
+                </button>
+            </div>
+        </section>
+
+        <section id="info" class="seccion">
+            <h2 id="info-title"></h2>
+            <ul id="info-list"></ul>
+            <button class="btn" onclick="volverMenu()">← Regresar al menú</button>
+        </section>
+
+        <section id="apartadoInfracciones" class="seccion">
+            <h2>📋 Registro de infracciones</h2>
+
+            <p class="nota">
+                Ingresa los datos de una infracción para hacer pruebas.
+                Por ahora, la información se conserva solamente mientras
+                esta página permanezca abierta y no se recargue.
+            </p>
+
+            <form id="formInfraccion">
+                <div class="formulario">
+
+                    <div class="campo">
+                        <label for="folio">Folio de infracción</label>
+                        <input type="text" id="folio" placeholder="Ej. INF-001" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="categoria">Categoría</label>
+                        <select id="categoria" required>
+                            <option value="">Selecciona una categoría</option>
+                            <option>Velocidad</option>
+                            <option>Documentación</option>
+                            <option>Estacionamiento</option>
+                            <option>Seguridad vial</option>
+                            <option>Señalización</option>
+                            <option>Alcohol y manejo</option>
+                            <option>Uso del celular</option>
+                            <option>Otra</option>
+                        </select>
+                    </div>
+
+                    <div class="campo completo">
+                        <label for="descripcion">Descripción de la infracción</label>
+                        <textarea id="descripcion"
+                            placeholder="Describe la falta cometida"
+                            required></textarea>
+                    </div>
+
+                    <div class="campo">
+                        <label for="articulo">Artículo o fundamento legal</label>
+                        <input type="text" id="articulo"
+                            placeholder="Ej. Artículo por verificar">
+                    </div>
+
+                    <div class="campo">
+                        <label for="monto">Monto de la multa (MXN)</label>
+                        <input type="number" id="monto" min="0" step="0.01"
+                            placeholder="Ej. 500" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="fecha">Fecha de registro</label>
+                        <input type="date" id="fecha" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="estado">Estado de la infracción</label>
+                        <select id="estado" required>
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="Pagada">Pagada</option>
+                            <option value="En revisión">En revisión</option>
+                            <option value="Cancelada">Cancelada</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn">➕ Registrar infracción</button>
+                <button type="reset" class="btn btn-secundario">Limpiar formulario</button>
+            </form>
+
+            <div id="mensaje" class="mensaje" role="status"></div>
+
+            <div class="buscador">
+                <label for="buscar" style="display:block; margin-bottom:8px; color:#ffd966;">
+                    🔎 Buscar por folio, categoría o descripción
+                </label>
+                <input type="search" id="buscar"
+                    placeholder="Escribe para filtrar los registros...">
+            </div>
+
+            <p class="contador" id="contador">Infracciones registradas: 0</p>
+
+            <div class="tabla-contenedor">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Folio</th>
+                            <th>Categoría</th>
+                            <th>Descripción</th>
+                            <th>Monto</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaInfracciones">
+                        <tr>
+                            <td colspan="7" style="text-align:center;">
+                                Todavía no hay infracciones registradas.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <button class="btn" onclick="volverMenu()">← Regresar al menú</button>
+            <button class="btn btn-secundario" onclick="exportarCSV()">
+                📥 Exportar registros CSV
+            </button>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>📚 CECyTO Vial · Villa Victoria, Estado de México</p>
+        <p>Proyecto educativo de cultura y seguridad vial</p>
+        <p>Consulta las disposiciones oficiales vigentes para confirmar los fundamentos legales y montos.</p>
+    </footer>
+
+    <script>
+        const reglamento = {
+            limites: {
+                titulo: "🚗 Límites de velocidad",
+                puntos: [
+                    "Respeta siempre los límites establecidos para cada tipo de vía.",
+                    "Reduce la velocidad en zonas escolares, cruces y lugares concurridos.",
+                    "Adapta tu velocidad a las condiciones del clima y del camino.",
+                    "Evita competir o acelerar de manera peligrosa."
+                ]
+            },
+
+            cinturon: {
+                titulo: "🪑 Cinturón de seguridad",
+                puntos: [
+                    "Utiliza correctamente el cinturón de seguridad.",
+                    "Verifica que todos los ocupantes estén protegidos.",
+                    "Los menores deben viajar con un sistema de retención adecuado.",
+                    "No inicies el viaje hasta comprobar que los pasajeros están asegurados."
+                ]
+            },
+
+            senalizacion: {
+                titulo: "🛑 Señales de tránsito",
+                puntos: [
+                    "Las señales reglamentarias indican obligaciones y restricciones.",
+                    "Las señales preventivas advierten sobre posibles peligros.",
+                    "Las señales informativas ayudan a identificar destinos y servicios.",
+                    "Obedece las señales colocadas en la vía."
+                ]
+            },
+
+            alcohol: {
+                titulo: "🚫 Alcohol y manejo",
+                puntos: [
+                    "No conduzcas después de consumir alcohol.",
+                    "El alcohol puede disminuir tus reflejos y capacidad de reacción.",
+                    "Utiliza transporte alternativo si has bebido.",
+                    "Respeta las disposiciones vigentes sobre conducción bajo los efectos del alcohol."
+                ]
+            },
+
+            peatones: {
+                titulo: "🚶 Derechos del peatón",
+                puntos: [
+                    "Utiliza banquetas y cruces peatonales cuando estén disponibles.",
+                    "Respeta los semáforos peatonales.",
+                    "Mira a ambos lados antes de cruzar.",
+                    "Los conductores deben respetar la prioridad peatonal conforme a las normas aplicables."
+                ]
+            },
+
+            sanciones: {
+                titulo: "⚠️ Sanciones",
+                puntos: [
+                    "Las infracciones y sus consecuencias dependen de la disposición aplicable.",
+                    "Consulta el reglamento oficial para verificar la sanción correspondiente.",
+                    "Conserva los documentos relacionados con una infracción.",
+                    "Utiliza los medios oficiales para aclaraciones o impugnaciones."
+                ]
+            },
+
+            semaforos: {
+                titulo: "🚦 Semáforos",
+                puntos: [
+                    "Rojo: detente antes de la línea de alto.",
+                    "Amarillo: prepárate para detenerte si puedes hacerlo con seguridad.",
+                    "Verde: avanza únicamente si el cruce está libre y es seguro.",
+                    "Respeta los semáforos peatonales y las indicaciones de los agentes."
+                ]
+            },
+
+            celular: {
+                titulo: "📱 Uso del celular",
+                puntos: [
+                    "Evita manipular el teléfono mientras conduces.",
+                    "Configura tu ruta antes de iniciar el viaje.",
+                    "Detente en un lugar permitido y seguro si necesitas atender el teléfono.",
+                    "Mantén tu atención en el camino."
+                ]
+            },
+
+            motociclistas: {
+                titulo: "🏍️ Motociclistas",
+                puntos: [
+                    "Utiliza casco de protección adecuado y correctamente ajustado.",
+                    "Respeta los límites de velocidad y las señales.",
+                    "Hazte visible y utiliza las luces correspondientes.",
+                    "No transportes más personas de las permitidas para el vehículo."
+                ]
+            },
+
+            estacionamiento: {
+                titulo: "🅿️ Estacionamiento",
+                puntos: [
+                    "Estaciona en lugares permitidos.",
+                    "No obstruyas rampas, banquetas, accesos ni cruces peatonales.",
+                    "Respeta los espacios reservados.",
+                    "Verifica las señales y restricciones de la zona."
+                ]
+            },
+
+            documentos: {
+                titulo: "📄 Documentos obligatorios",
+                puntos: [
+                    "Verifica qué documentos son exigibles para tu vehículo y situación.",
+                    "Mantén vigentes los documentos que correspondan.",
+                    "Comprueba que los datos de tus documentos sean correctos.",
+                    "Consulta los requisitos oficiales del Estado de México."
+                ]
+            },
+
+            emergencias: {
+                titulo: "🚑 Vehículos de emergencia",
+                puntos: [
+                    "Facilita el paso cuando se aproxime un vehículo de emergencia con señales activadas.",
+                    "Mantén la calma y evita movimientos repentinos.",
+                    "No sigas a una ambulancia para aprovechar su paso.",
+                    "Nunca bloquees accesos destinados a emergencias."
+                ]
+            },
+
+            bicicletas: {
+                titulo: "🚲 Ciclistas",
+                puntos: [
+                    "Utiliza equipo de protección y elementos visibles.",
+                    "Respeta las señales y los semáforos.",
+                    "Indica tus movimientos cuando sea posible hacerlo con seguridad.",
+                    "Circula con precaución y presta atención a los vehículos y peatones."
+                ]
+            },
+
+            seguridad: {
+                titulo: "🦺 Equipo de seguridad",
+                puntos: [
+                    "Revisa que el vehículo se encuentre en condiciones adecuadas.",
+                    "Comprueba el funcionamiento de luces, frenos y neumáticos.",
+                    "Utiliza el equipo de protección correspondiente al vehículo.",
+                    "No conduzcas un vehículo que represente un peligro."
+                ]
+            },
+
+            distancia: {
+                titulo: "↔️ Distancia entre vehículos",
+                puntos: [
+                    "Conserva suficiente distancia con el vehículo de adelante.",
+                    "Aumenta la separación cuando llueva o haya poca visibilidad.",
+                    "Evita frenar bruscamente sin necesidad.",
+                    "No conduzcas pegado a otros vehículos."
+                ]
+            },
+
+            lluvia: {
+                titulo: "🌧️ Conducir con lluvia",
+                puntos: [
+                    "Reduce la velocidad y aumenta la distancia de seguridad.",
+                    "Enciende las luces cuando las condiciones lo requieran.",
+                    "Evita frenar o girar bruscamente.",
+                    "Si las condiciones son peligrosas, busca un lugar seguro para detenerte."
+                ]
+            }
+        };
+
+        let infracciones = [];
+
+        document.querySelectorAll("[data-rule]").forEach(boton => {
+            boton.addEventListener("click", () => {
+                const regla = reglamento[boton.dataset.rule];
+
+                document.getElementById("inicioReglamento").style.display = "none";
+                document.getElementById("apartadoInfracciones").style.display = "none";
+                document.getElementById("info").style.display = "block";
+
+                document.getElementById("info-title").textContent = regla.titulo;
+
+                const lista = document.getElementById("info-list");
+                lista.replaceChildren();
+
+                regla.puntos.forEach(punto => {
+                    const li = document.createElement("li");
+                    li.textContent = punto;
+                    lista.appendChild(li);
+                });
+
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        });
+
+        function mostrarInfracciones() {
+            document.getElementById("inicioReglamento").style.display = "none";
+            document.getElementById("info").style.display = "none";
+            document.getElementById("apartadoInfracciones").style.display = "block";
+
+            document.getElementById("fecha").value =
+                new Date().toLocaleDateString("en-CA");
+
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        function volverMenu() {
+            document.getElementById("inicioReglamento").style.display = "block";
+            document.getElementById("info").style.display = "none";
+            document.getElementById("apartadoInfracciones").style.display = "none";
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        const formulario = document.getElementById("formInfraccion");
+
+        formulario.addEventListener("submit", function(evento) {
+            evento.preventDefault();
+
+            const folio = document.getElementById("folio").value.trim();
+
+            if (infracciones.some(item =>
+                item.folio.toLowerCase() === folio.toLowerCase()
+            )) {
+                mostrarMensaje("Ese folio ya está registrado. Utiliza otro.");
+                return;
+            }
+
+            const nueva = {
+                folio: folio,
+                categoria: document.getElementById("categoria").value,
+                descripcion: document.getElementById("descripcion").value.trim(),
+                articulo: document.getElementById("articulo").value.trim(),
+                monto: Number(document.getElementById("monto").value),
+                fecha: document.getElementById("fecha").value,
+                estado: document.getElementById("estado").value
+            };
+
+            infracciones.push(nueva);
+            formulario.reset();
+
+            document.getElementById("fecha").value =
+                new Date().toLocaleDateString("en-CA");
+
+            dibujarTabla();
+            mostrarMensaje("Infracción registrada temporalmente.");
+        });
+
+        function dibujarTabla() {
+            const tabla = document.getElementById("tablaInfracciones");
+            const busqueda = document.getElementById("buscar").value
+                .trim().toLowerCase();
+
+            tabla.replaceChildren();
+
+            const filtradas = infracciones.filter(item =>
+                [item.folio, item.categoria, item.descripcion, item.estado]
+                    .some(valor => valor.toLowerCase().includes(busqueda))
+            );
+
+            document.getElementById("contador").textContent =
+                "Infracciones registradas: " + infracciones.length +
+                " | Resultados: " + filtradas.length;
+
+            if (filtradas.length === 0) {
+                const fila = tabla.insertRow();
+                const celda = fila.insertCell();
+                celda.colSpan = 7;
+                celda.style.textAlign = "center";
+                celda.textContent = "No hay registros que mostrar.";
+                return;
+            }
+
+            filtradas.forEach(item => {
+                const fila = tabla.insertRow();
+
+                [
+                    item.folio,
+                    item.categoria,
+                    item.descripcion,
+                    item.monto.toLocaleString("es-MX", {
+                        style: "currency",
+                        currency: "MXN"
+                    }),
+                    item.fecha,
+                    item.estado
+                ].forEach(valor => {
+                    const celda = fila.insertCell();
+                    celda.textContent = valor;
+                });
+
+                const celdaAccion = fila.insertCell();
+                const boton = document.createElement("button");
+
+                boton.textContent = "Eliminar";
+                boton.className = "btn btn-eliminar";
+
+                boton.addEventListener("click", () => {
+                    infracciones = infracciones.filter(
+                        registro => registro.folio !== item.folio
+                    );
+
+                    dibujarTabla();
+                    mostrarMensaje("Registro eliminado.");
+                });
+
+                celdaAccion.appendChild(boton);
+            });
+        }
+
+        document.getElementById("buscar").addEventListener("input", dibujarTabla);
+
+        function mostrarMensaje(texto) {
+            const mensaje = document.getElementById("mensaje");
+            mensaje.textContent = texto;
+            mensaje.style.display = "block";
+        }
+
+        function exportarCSV() {
+            if (infracciones.length === 0) {
+                mostrarMensaje("No hay registros para exportar.");
+                return;
+            }
+
+            const encabezados = [
+                "Folio", "Categoría", "Descripción",
+                "Artículo", "Monto", "Fecha", "Estado"
+            ];
+
+            const filas = infracciones.map(item => [
+                item.folio,
+                item.categoria,
+                item.descripcion,
+                item.articulo,
+                item.monto,
+                item.fecha,
+                item.estado
+            ]);
+
+            const escapar = valor =>
+                '"' + String(valor).replace(/"/g, '""') + '"';
+
+            const contenido = [encabezados, ...filas]
+                .map(fila => fila.map(escapar).join(","))
+                .join("\r\n");
+
+            const archivo = new Blob(
+                ["\uFEFF" + contenido],
+                { type: "text/csv;charset=utf-8;" }
+            );
+
+            const url = URL.createObjectURL(archivo);
+            const enlace = document.createElement("a");
+
+            enlace.href = url;
+            enlace.download = "infracciones_cecyto_vial.csv";
+            enlace.click();
+
+            URL.revokeObjectURL(url);
+            mostrarMensaje("Archivo CSV generado.");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,453 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Interactivo | CECyTO Vial</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #0b3d5c, #005b96, #0b3d5c);
+            color: white;
+            min-height: 100vh;
+        }
+
+        .stripes {
+            height: 12px;
+            background: repeating-linear-gradient(
+                90deg, #ffb300 0 40px, white 40px 80px
+            );
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 15px 20px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            text-shadow: 2px 2px #ffb300;
+        }
+
+        header p {
+            color: #ffd966;
+            margin-top: 10px;
+            font-size: 1.1em;
+        }
+
+        .contenedor {
+            max-width: 850px;
+            margin: 20px auto;
+            padding: 25px;
+            width: 92%;
+            background: rgba(255, 255, 255, 0.10);
+            border: 2px solid #ffb300;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .instrucciones {
+            text-align: center;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .progreso {
+            background: rgba(255, 255, 255, 0.2);
+            height: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        #barra {
+            width: 0%;
+            height: 100%;
+            background: #ffb300;
+            transition: width 0.3s;
+        }
+
+        .pregunta {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 18px;
+            margin-bottom: 18px;
+            border-radius: 12px;
+            border-left: 5px solid #ffb300;
+        }
+
+        .pregunta h3 {
+            color: #ffd966;
+            margin-bottom: 13px;
+            font-size: 1.05em;
+        }
+
+        .opcion {
+            display: block;
+            padding: 11px;
+            margin: 8px 0;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .opcion:hover {
+            background: rgba(255, 179, 0, 0.2);
+        }
+
+        .opcion input {
+            margin-right: 9px;
+            accent-color: #ffb300;
+        }
+
+        .botones {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        button {
+            padding: 13px 22px;
+            border: none;
+            border-radius: 25px;
+            background: #ffb300;
+            color: #0b3d5c;
+            font-weight: bold;
+            font-size: 1em;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #ffd966;
+            transform: translateY(-2px);
+        }
+
+        .secundario {
+            background: white;
+        }
+
+        #resultado {
+            display: none;
+            text-align: center;
+            margin-top: 25px;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 2px solid #ffb300;
+            border-radius: 15px;
+        }
+
+        #resultado h2 {
+            color: #ffd966;
+            margin-bottom: 15px;
+        }
+
+        #calificacion {
+            font-size: 2.4em;
+            font-weight: bold;
+            color: #ffb300;
+            margin: 12px 0;
+        }
+
+        #detalle {
+            text-align: left;
+            line-height: 1.8;
+            margin-top: 20px;
+        }
+
+        .volver {
+            display: inline-block;
+            text-decoration: none;
+            color: #0b3d5c;
+            background: white;
+            padding: 12px 22px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #cce5ff;
+            border-top: 2px solid #ffb300;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.9em;
+            }
+
+            .contenedor {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stripes"></div>
+
+    <header>
+        <h1>🧠 QUIZ VIAL</h1>
+        <p>¡Demuestra cuánto sabes sobre seguridad vial!</p>
+        <p>CECyTO Vial · Villa Victoria, Estado de México</p>
+    </header>
+
+    <main class="contenedor">
+        <div class="instrucciones">
+            <h2>🚦 Reto de conocimientos</h2>
+            <p>Contesta las 15 preguntas y descubre cuántos aciertos obtuviste.</p>
+            <p>Selecciona una sola respuesta por pregunta.</p>
+        </div>
+
+        <div class="progreso">
+            <div id="barra"></div>
+        </div>
+
+        <p id="contador" style="text-align:center; margin-bottom:20px;">
+            Preguntas contestadas: 0 de 15
+        </p>
+
+        <form id="quiz">
+            <div id="preguntas"></div>
+
+            <div class="botones">
+                <button type="submit">Calificar respuestas ✅</button>
+                <button type="button" class="secundario" onclick="reiniciarQuiz()">
+                    Reiniciar 🔄
+                </button>
+            </div>
+        </form>
+
+        <section id="resultado" aria-live="polite">
+            <h2>🏁 ¡Quiz terminado!</h2>
+            <p id="mensaje"></p>
+            <div id="calificacion"></div>
+            <p id="aciertos"></p>
+            <p id="incorrectas"></p>
+            <div id="detalle"></div>
+
+            <button type="button" onclick="reiniciarQuiz()">
+                Intentar de nuevo 🔄
+            </button>
+
+            <br>
+
+            <a href="index.html" class="volver">🏠 Volver al inicio</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>📚 Proyecto escolar · CECyTO Vial · Villa Victoria, Estado de México</p>
+        <p>Conduce con responsabilidad. ¡Tu seguridad es primero!</p>
+    </footer>
+
+    <script>
+        const preguntas = [
+            {
+                pregunta: "¿Qué significa el color rojo en un semáforo?",
+                opciones: ["Avanzar rápidamente", "Detenerse", "Aumentar la velocidad"],
+                correcta: 1
+            },
+            {
+                pregunta: "¿Qué debes hacer antes de cruzar una calle?",
+                opciones: ["Mirar a ambos lados", "Correr sin mirar", "Usar el celular"],
+                correcta: 0
+            },
+            {
+                pregunta: "¿Para qué sirve el cinturón de seguridad?",
+                opciones: ["Para decorar el vehículo", "Para evitar multas solamente", "Para proteger a los ocupantes"],
+                correcta: 2
+            },
+            {
+                pregunta: "¿Qué debes hacer cuando el semáforo está en amarillo?",
+                opciones: ["Acelerar siempre", "Prepararte para detenerte si es seguro", "Ignorarlo"],
+                correcta: 1
+            },
+            {
+                pregunta: "¿Quién debe usar casco al viajar en motocicleta?",
+                opciones: ["Solamente el conductor", "Solamente el acompañante", "El conductor y el acompañante"],
+                correcta: 2
+            },
+            {
+                pregunta: "¿Qué significa una señal de ALTO?",
+                opciones: ["Detenerse completamente", "Tocar el claxon", "Seguir con precaución sin detenerse"],
+                correcta: 0
+            },
+            {
+                pregunta: "¿Qué debes hacer si vas a conducir?",
+                opciones: ["Beber alcohol moderadamente", "Evitar alcohol y drogas", "Usar el celular mientras manejas"],
+                correcta: 1
+            },
+            {
+                pregunta: "¿Por dónde deben caminar normalmente los peatones?",
+                opciones: ["Por el centro de la calle", "Por el carril de los automóviles", "Por la banqueta"],
+                correcta: 2
+            },
+            {
+                pregunta: "¿Qué debes hacer para cambiar de carril?",
+                opciones: ["Señalizar y verificar que sea seguro", "Girar sin avisar", "Frenar de golpe"],
+                correcta: 0
+            },
+            {
+                pregunta: "¿Qué indica una señal triangular de advertencia?",
+                opciones: ["Un lugar para estacionarse", "Un posible peligro o condición especial", "Que puedes ignorar las reglas"],
+                correcta: 1
+            },
+            {
+                pregunta: "¿Qué debes hacer si se acerca una ambulancia con sirena y luces encendidas?",
+                opciones: ["Competir para pasar primero", "Seguir sin prestar atención", "Facilitar el paso cuando sea seguro"],
+                correcta: 2
+            },
+            {
+                pregunta: "¿Cuál es una conducta segura al conducir?",
+                opciones: ["Mantener una distancia adecuada", "Conducir demasiado cerca de otro vehículo", "Rebasar en cualquier lugar"],
+                correcta: 0
+            },
+            {
+                pregunta: "¿Qué debes hacer antes de abrir la puerta de un automóvil estacionado?",
+                opciones: ["Abrirla rápidamente", "Verificar que no se acerquen ciclistas u otros vehículos", "Bajarte sin mirar"],
+                correcta: 1
+            },
+            {
+                pregunta: "¿Por qué es peligroso usar el celular al conducir?",
+                opciones: ["Porque mejora demasiado la atención", "Porque reduce el consumo de gasolina", "Porque distrae y aumenta el riesgo de accidentes"],
+                correcta: 2
+            },
+            {
+                pregunta: "¿Cuál es el objetivo principal del reglamento de tránsito?",
+                opciones: ["Promover la seguridad y el orden vial", "Hacer que todos conduzcan más rápido", "Permitir que cada persona invente sus reglas"],
+                correcta: 0
+            }
+        ];
+
+        const formulario = document.getElementById("quiz");
+        const contenedorPreguntas = document.getElementById("preguntas");
+
+        function mostrarPreguntas() {
+            contenedorPreguntas.innerHTML = "";
+
+            preguntas.forEach((p, i) => {
+                const bloque = document.createElement("section");
+                bloque.className = "pregunta";
+
+                const titulo = document.createElement("h3");
+                titulo.textContent = `${i + 1}. ${p.pregunta}`;
+                bloque.appendChild(titulo);
+
+                p.opciones.forEach((opcion, j) => {
+                    const etiqueta = document.createElement("label");
+                    etiqueta.className = "opcion";
+
+                    const radio = document.createElement("input");
+                    radio.type = "radio";
+                    radio.name = `pregunta${i}`;
+                    radio.value = j;
+                    radio.addEventListener("change", actualizarProgreso);
+
+                    etiqueta.appendChild(radio);
+                    etiqueta.appendChild(document.createTextNode(opcion));
+                    bloque.appendChild(etiqueta);
+                });
+
+                contenedorPreguntas.appendChild(bloque);
+            });
+
+            actualizarProgreso();
+        }
+
+        function actualizarProgreso() {
+            let contestadas = 0;
+
+            preguntas.forEach((p, i) => {
+                if (formulario.querySelector(`input[name="pregunta${i}"]:checked`)) {
+                    contestadas++;
+                }
+            });
+
+            document.getElementById("contador").textContent =
+                `Preguntas contestadas: ${contestadas} de ${preguntas.length}`;
+
+            document.getElementById("barra").style.width =
+                `${(contestadas / preguntas.length) * 100}%`;
+        }
+
+        formulario.addEventListener("submit", function(evento) {
+            evento.preventDefault();
+
+            let aciertos = 0;
+            let sinContestar = 0;
+            let detalle = "";
+
+            preguntas.forEach((p, i) => {
+                const seleccion = formulario.querySelector(
+                    `input[name="pregunta${i}"]:checked`
+                );
+
+                if (!seleccion) {
+                    sinContestar++;
+                    detalle += `<p>⚪ ${i + 1}. Sin contestar. Respuesta correcta: ${p.opciones[p.correcta]}</p>`;
+                } else if (Number(seleccion.value) === p.correcta) {
+                    aciertos++;
+                    detalle += `<p>✅ ${i + 1}. Correcto: ${p.opciones[p.correcta]}</p>`;
+                } else {
+                    detalle += `<p>❌ ${i + 1}. Tu respuesta: ${p.opciones[Number(seleccion.value)]}<br>Respuesta correcta: ${p.opciones[p.correcta]}</p>`;
+                }
+            });
+
+            const porcentaje = Math.round((aciertos / preguntas.length) * 100);
+            let mensaje = "";
+
+            if (aciertos >= 13) {
+                mensaje = "¡Excelente! Dominas muy bien los conocimientos viales. 🏆";
+            } else if (aciertos >= 10) {
+                mensaje = "¡Muy bien! Tienes buenos conocimientos de seguridad vial. 👏";
+            } else if (aciertos >= 7) {
+                mensaje = "¡Buen esfuerzo! Puedes seguir practicando. 🚦";
+            } else {
+                mensaje = "Sigue aprendiendo y vuelve a intentarlo. ¡Tú puedes! 💪";
+            }
+
+            document.getElementById("mensaje").textContent = mensaje;
+            document.getElementById("calificacion").textContent =
+                `${porcentaje}%`;
+            document.getElementById("aciertos").textContent =
+                `Aciertos: ${aciertos} de ${preguntas.length}`;
+            document.getElementById("incorrectas").textContent =
+                `Incorrectas o sin contestar: ${preguntas.length - aciertos}`;
+            document.getElementById("detalle").innerHTML = detalle;
+
+            document.getElementById("resultado").style.display = "block";
+            document.getElementById("resultado").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        });
+
+        function reiniciarQuiz() {
+            formulario.reset();
+            document.getElementById("resultado").style.display = "none";
+            actualizarProgreso();
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+        mostrarPreguntas();
+    </script>
+</body>
+</html>

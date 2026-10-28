@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CECyTO Vial | Villa Victoria</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #0b3d5c 0%, #005b96 50%, #0b3d5c 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+        /* Barra superior estilo vial */
+        .stripes {
+            height: 12px;
+            background: repeating-linear-gradient(90deg, #ffb300 0 40px, #fff 40px 80px);
+        }
+        header {
+            text-align: center;
+            padding: 30px 20px 10px;
+        }
+        header h1 {
+            font-size: 2.8em;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 0 #ffb300;
+        }
+        header p {
+            font-size: 1.2em;
+            color: #ffd966;
+            margin-top: 5px;
+        }
+        .badge {
+            display: inline-block;
+            background: #ffb300;
+            color: #0b3d5c;
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-top: 10px;
+        }
+        /* Bienvenida */
+        .welcome {
+            max-width: 800px;
+            margin: 25px auto;
+            padding: 25px;
+            background: rgba(255,255,255,0.1);
+            border-left: 6px solid #ffb300;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .welcome h2 { color: #ffd966; margin-bottom: 10px; }
+        .welcome p { line-height: 1.6; }
+        /* Botones llamativos */
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .menu a {
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(145deg, #0077b6, #005b96);
+            border: 3px solid #ffb300;
+            border-radius: 15px;
+            padding: 25px 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: transform .2s, box-shadow .2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .menu a:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(255,179,0,0.4);
+        }
+        .menu .icon { font-size: 2.5em; display: block; margin-bottom: 8px; }
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: .9em;
+            color: #cce5ff;
+            border-top: 2px solid #ffb300;
+            margin-top: 30px;
+        }
+        /* ===== FORMULARIO DE REGISTRO ===== */
+        .registro {
+            max-width: 500px;
+            margin: 25px auto;
+            padding: 25px;
+            background: rgba(255,255,255,0.12);
+            border: 3px solid #ffb300;
+            border-radius: 15px;
+            text-align: center;
+        }
+        .registro h2 { color: #ffd966; margin-bottom: 15px; }
+        .registro label {
+            display: block;
+            text-align: left;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #ffd966;
+        }
+        .registro input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #0077b6;
+            border-radius: 8px;
+            font-size: 1em;
+            background: #fff;
+            color: #0b3d5c;
+        }
+        .registro input:focus {
+            outline: none;
+            border-color: #ffb300;
+        }
+        .registro button {
+            margin-top: 15px;
+            width: 100%;
+            padding: 12px;
+            background: #ffb300;
+            color: #0b3d5c;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background .2s;
+        }
+        .registro button:hover { background: #ffd966; }
+        .error {
+            color: #ff6b6b;
+            font-size: .9em;
+            margin-top: 8px;
+            display: none;
+        }
+        .oculto { display: none; }
+    </style>
+</head>
+<body>
+    <div class="stripes"></div>
+    <header>
+        <h1>🚦 CECyTO VIAL</h1>
+        <p>Reglamento de Tránsito para una movilidad segura</p>
+        <span class="badge">Villa Victoria, Estado de México</span>
+    </header>
+
+    <!-- FORMULARIO DE REGISTRO -->
+    <section class="registro" id="registro">
+        <h2>📝 Regístrate</h2>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" placeholder="Tu nombre">
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" placeholder="tucorreo@ejemplo.com">
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" placeholder="Tu edad" min="1" max="120">
+        <button onclick="guardarRegistro()">Registrarme ✅</button>
+        <p class="error" id="error">Por favor, completa todos los campos correctamente.</p>
+    </section>
+
+    <!-- CONTENIDO PRINCIPAL (oculto hasta registrarse) -->
+    <div id="contenido" class="oculto">
+        <section class="welcome">
+            <h2 id="saludo">¡Bienvenido(a)! 👋</h2>
+            <p>Aprende sobre vialidad, reglamento de tránsito y datos curiosos del Estado de México.
+            Explora las secciones y conviértete en un conductor responsable. 🚗💨</p>
+            <p style="margin-top:10px; font-size:.9em; color:#cce5ff;">
+                👤 <span id="datosUsuario"></span>
+            </p>
+        </section>
+
+        <nav class="menu">
+            <a href="que_es.html"><span class="icon">ℹ️</span>¿Qué es?</a>
+            <a href="aprendamos.html"><span class="icon">📚</span>Aprendamos</a>
+            <a href="reglamento.html"><span class="icon">📜</span>Reglamento</a>
+            <a href="datos_curiosos.html"><span class="icon">💡</span>Datos Curiosos</a>
+            <a href="quiz.html"><span class="icon">🧠</span>Quiz Interactivo</a>
+        </nav>
+    </div>
+
+    <footer>
+        <p>📚 Proyecto escolar · CECyTO Vial · Villa Victoria, Estado de México</p>
+    </footer>
+
+    <script>
+        // ===== REGISTRO DE USUARIO =====
+        function guardarRegistro() {
+            const nombre = document.getElementById('nombre').value.trim();
+            const correo = document.getElementById('correo').value.trim();
+            const edad = document.getElementById('edad').value;
+            const error = document.getElementById('error');
+
+            // Validar que no estén vacíos
+            if (!nombre || !correo || !edad) {
+                error.style.display = 'block';
+                return;
+            }
+
+            // Validar formato de correo
+            const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!regexCorreo.test(correo)) {
+                error.textContent = 'Ingresa un correo válido (ej: nombre@correo.com).';
+                error.style.display = 'block';
+                return;
+            }
+
+            // Validar edad
+            if (edad < 1 || edad > 120) {
+                error.textContent = 'Ingresa una edad válida (1 a 120 años).';
+                error.style.display = 'block';
+                return;
+            }
+
+            // Guardar en el navegador
+            const usuario = { nombre, correo, edad };
+            localStorage.setItem('cecytoUsuario', JSON.stringify(usuario));
+
+            // Mostrar contenido
+            mostrarContenido(usuario);
+        }
+
+        function mostrarContenido(usuario) {
+            document.getElementById('registro').style.display = 'none';
+            document.getElementById('contenido').classList.remove('oculto');
+
+            // Saludo según la hora
+            const hora = new Date().getHours();
+            let saludo = '¡Bienvenido(a)! 👋';
+            if (hora < 12) saludo = '¡Buenos días! ☀️';
+            else if (hora < 19) saludo = '¡Buenas tardes! 🌤️';
+            else saludo = '¡Buenas noches! 🌙';
+
+            document.getElementById('saludo').textContent = saludo + ' ' + usuario.nombre;
+            document.getElementById('datosUsuario').textContent =
+                usuario.nombre + ' · ' + usuario.edad + ' años · ' + usuario.correo;
+        }
+
+        // Si ya estaba registrado antes, mostrar directo
+        window.onload = function() {
+            const guardado = localStorage.getItem('cecytoUsuario');
+            if (guardado) {
+                mostrarContenido(JSON.parse(guardado));
+            }
+        };
+    </script>
+</body>
+</html>
