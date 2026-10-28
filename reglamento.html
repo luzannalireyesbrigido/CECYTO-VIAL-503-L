@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -22,11 +21,7 @@
 
         .stripes {
             height: 12px;
-            background: repeating-linear-gradient(
-                90deg,
-                #ffb300 0 40px,
-                #fff 40px 80px
-            );
+            background: repeating-linear-gradient(90deg, #ffb300 0 40px, #fff 40px 80px);
         }
 
         header {
@@ -46,10 +41,20 @@
 
         .back {
             display: inline-block;
-            margin: 10px 20px;
-            color: #ffd966;
+            background: #ffb300;
+            color: #0b3d5c;
             text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
             font-weight: bold;
+            margin: 20px;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .back:hover {
+            background: #ffd966;
+            transform: translateY(-3px);
         }
 
         .container {
@@ -177,23 +182,7 @@
             font-family: inherit;
             font-size: 1em;
         }
-.back{
-            display: inline-block;
-            background: #ffb300;
-            color: #0b3d5c;
-            text-decoration: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            font-weight: bold;
-            margin: 20px;
-            transition: 0.3s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
 
-        .back:hover{
-            background: #ffd966;
-            transform: translateY(-3px);
-        }
         .campo textarea {
             resize: vertical;
             min-height: 85px;
@@ -219,7 +208,7 @@
             width: 100%;
             border-collapse: collapse;
             background: #ffffff0d;
-            min-width: 650px;
+            min-width: 850px;
         }
 
         th, td {
@@ -307,74 +296,23 @@
             </div>
 
             <div class="menu" id="menu">
-
-                <button class="rule-btn" data-rule="limites">
-                    <span class="icon">🚗</span>Límites de velocidad
-                </button>
-
-                <button class="rule-btn" data-rule="cinturon">
-                    <span class="icon">🪑</span>Cinturón de seguridad
-                </button>
-
-                <button class="rule-btn" data-rule="senalizacion">
-                    <span class="icon">🛑</span>Señales de tránsito
-                </button>
-
-                <button class="rule-btn" data-rule="alcohol">
-                    <span class="icon">🚫</span>Alcohol y manejo
-                </button>
-
-                <button class="rule-btn" data-rule="peatones">
-                    <span class="icon">🚶</span>Derechos del peatón
-                </button>
-
-                <button class="rule-btn" data-rule="sanciones">
-                    <span class="icon">⚠️</span>Sanciones
-                </button>
-
-                <button class="rule-btn" data-rule="semaforos">
-                    <span class="icon">🚦</span>Semáforos
-                </button>
-
-                <button class="rule-btn" data-rule="celular">
-                    <span class="icon">📱</span>Uso del celular
-                </button>
-
-                <button class="rule-btn" data-rule="motociclistas">
-                    <span class="icon">🏍️</span>Motociclistas
-                </button>
-
-                <button class="rule-btn" data-rule="estacionamiento">
-                    <span class="icon">🅿️</span>Estacionamiento
-                </button>
-
-                <button class="rule-btn" data-rule="documentos">
-                    <span class="icon">📄</span>Documentos obligatorios
-                </button>
-
-                <button class="rule-btn" data-rule="emergencias">
-                    <span class="icon">🚑</span>Vehículos de emergencia
-                </button>
-
-                <button class="rule-btn" data-rule="bicicletas">
-                    <span class="icon">🚲</span>Ciclistas
-                </button>
-
-                <button class="rule-btn" data-rule="seguridad">
-                    <span class="icon">🦺</span>Equipo de seguridad
-                </button>
-
-                <button class="rule-btn" data-rule="distancia">
-                    <span class="icon">↔️</span>Distancia entre vehículos
-                </button>
-
-                <button class="rule-btn" data-rule="lluvia">
-                    <span class="icon">🌧️</span>Conducir con lluvia
-                </button>
-
-                <button class="rule-btn" onclick="mostrarInfracciones()">
-                    <span class="icon">📋</span>Registro de infracciones
-                </button>
+                <button class="rule-btn" data-rule="limites"><span class="icon">🚗</span>Límites de velocidad</button>
+                <button class="rule-btn" data-rule="cinturon"><span class="icon">🪑</span>Cinturón de seguridad</button>
+                <button class="rule-btn" data-rule="senalizacion"><span class="icon">🛑</span>Señales de tránsito</button>
+                <button class="rule-btn" data-rule="alcohol"><span class="icon">🚫</span>Alcohol y manejo</button>
+                <button class="rule-btn" data-rule="peatones"><span class="icon">🚶</span>Derechos del peatón</button>
+                <button class="rule-btn" data-rule="sanciones"><span class="icon">⚠️</span>Sanciones</button>
+                <button class="rule-btn" data-rule="semaforos"><span class="icon">🚦</span>Semáforos</button>
+                <button class="rule-btn" data-rule="celular"><span class="icon">📱</span>Uso del celular</button>
+                <button class="rule-btn" data-rule="motociclistas"><span class="icon">🏍️</span>Motociclistas</button>
+                <button class="rule-btn" data-rule="estacionamiento"><span class="icon">🅿️</span>Estacionamiento</button>
+                <button class="rule-btn" data-rule="documentos"><span class="icon">📄</span>Documentos obligatorios</button>
+                <button class="rule-btn" data-rule="emergencias"><span class="icon">🚑</span>Vehículos de emergencia</button>
+                <button class="rule-btn" data-rule="bicicletas"><span class="icon">🚲</span>Ciclistas</button>
+                <button class="rule-btn" data-rule="seguridad"><span class="icon">🦺</span>Equipo de seguridad</button>
+                <button class="rule-btn" data-rule="distancia"><span class="icon">↔️</span>Distancia entre vehículos</button>
+                <button class="rule-btn" data-rule="lluvia"><span class="icon">🌧️</span>Conducir con lluvia</button>
+                <button class="rule-btn" onclick="mostrarInfracciones()"><span class="icon">📋</span>Registro de infracciones</button>
             </div>
         </section>
 
@@ -416,23 +354,30 @@
                         </select>
                     </div>
 
+                    <div class="campo">
+                        <label for="clasificacion">Clasificación de la infracción</label>
+                        <select id="clasificacion" required>
+                            <option value="">Selecciona una clasificación</option>
+                            <option value="Leve">Leve</option>
+                            <option value="Grave">Grave</option>
+                            <option value="Gravísima">Gravísima</option>
+                            <option value="Sanción administrativa">Sanción administrativa</option>
+                        </select>
+                    </div>
+
                     <div class="campo completo">
                         <label for="descripcion">Descripción de la infracción</label>
-                        <textarea id="descripcion"
-                            placeholder="Describe la falta cometida"
-                            required></textarea>
+                        <textarea id="descripcion" placeholder="Describe la falta cometida" required></textarea>
                     </div>
 
                     <div class="campo">
                         <label for="articulo">Artículo o fundamento legal</label>
-                        <input type="text" id="articulo"
-                            placeholder="Ej. Artículo por verificar">
+                        <input type="text" id="articulo" placeholder="Ej. Artículo por verificar">
                     </div>
 
                     <div class="campo">
                         <label for="monto">Monto de la multa (MXN)</label>
-                        <input type="number" id="monto" min="0" step="0.01"
-                            placeholder="Ej. 500" required>
+                        <input type="number" id="monto" min="0" step="0.01" placeholder="Ej. 500" required>
                     </div>
 
                     <div class="campo">
@@ -460,10 +405,9 @@
 
             <div class="buscador">
                 <label for="buscar" style="display:block; margin-bottom:8px; color:#ffd966;">
-                    🔎 Buscar por folio, categoría o descripción
+                    🔎 Buscar por folio, categoría, clasificación o descripción
                 </label>
-                <input type="search" id="buscar"
-                    placeholder="Escribe para filtrar los registros...">
+                <input type="search" id="buscar" placeholder="Escribe para filtrar los registros...">
             </div>
 
             <p class="contador" id="contador">Infracciones registradas: 0</p>
@@ -474,6 +418,7 @@
                         <tr>
                             <th>Folio</th>
                             <th>Categoría</th>
+                            <th>Clasificación</th>
                             <th>Descripción</th>
                             <th>Monto</th>
                             <th>Fecha</th>
@@ -483,7 +428,7 @@
                     </thead>
                     <tbody id="tablaInfracciones">
                         <tr>
-                            <td colspan="7" style="text-align:center;">
+                            <td colspan="8" style="text-align:center;">
                                 Todavía no hay infracciones registradas.
                             </td>
                         </tr>
@@ -492,9 +437,7 @@
             </div>
 
             <button class="btn" onclick="volverMenu()">← Regresar al menú</button>
-            <button class="btn btn-secundario" onclick="exportarCSV()">
-                📥 Exportar registros CSV
-            </button>
+            <button class="btn btn-secundario" onclick="exportarCSV()">📥 Exportar registros CSV</button>
         </section>
 
     </main>
@@ -516,7 +459,6 @@
                     "Evita competir o acelerar de manera peligrosa."
                 ]
             },
-
             cinturon: {
                 titulo: "🪑 Cinturón de seguridad",
                 puntos: [
@@ -526,7 +468,6 @@
                     "No inicies el viaje hasta comprobar que los pasajeros están asegurados."
                 ]
             },
-
             senalizacion: {
                 titulo: "🛑 Señales de tránsito",
                 puntos: [
@@ -536,7 +477,6 @@
                     "Obedece las señales colocadas en la vía."
                 ]
             },
-
             alcohol: {
                 titulo: "🚫 Alcohol y manejo",
                 puntos: [
@@ -546,7 +486,6 @@
                     "Respeta las disposiciones vigentes sobre conducción bajo los efectos del alcohol."
                 ]
             },
-
             peatones: {
                 titulo: "🚶 Derechos del peatón",
                 puntos: [
@@ -556,7 +495,6 @@
                     "Los conductores deben respetar la prioridad peatonal conforme a las normas aplicables."
                 ]
             },
-
             sanciones: {
                 titulo: "⚠️ Sanciones",
                 puntos: [
@@ -566,7 +504,6 @@
                     "Utiliza los medios oficiales para aclaraciones o impugnaciones."
                 ]
             },
-
             semaforos: {
                 titulo: "🚦 Semáforos",
                 puntos: [
@@ -576,7 +513,6 @@
                     "Respeta los semáforos peatonales y las indicaciones de los agentes."
                 ]
             },
-
             celular: {
                 titulo: "📱 Uso del celular",
                 puntos: [
@@ -586,7 +522,6 @@
                     "Mantén tu atención en el camino."
                 ]
             },
-
             motociclistas: {
                 titulo: "🏍️ Motociclistas",
                 puntos: [
@@ -596,7 +531,6 @@
                     "No transportes más personas de las permitidas para el vehículo."
                 ]
             },
-
             estacionamiento: {
                 titulo: "🅿️ Estacionamiento",
                 puntos: [
@@ -606,7 +540,6 @@
                     "Verifica las señales y restricciones de la zona."
                 ]
             },
-
             documentos: {
                 titulo: "📄 Documentos obligatorios",
                 puntos: [
@@ -616,7 +549,6 @@
                     "Consulta los requisitos oficiales del Estado de México."
                 ]
             },
-
             emergencias: {
                 titulo: "🚑 Vehículos de emergencia",
                 puntos: [
@@ -626,7 +558,6 @@
                     "Nunca bloquees accesos destinados a emergencias."
                 ]
             },
-
             bicicletas: {
                 titulo: "🚲 Ciclistas",
                 puntos: [
@@ -636,7 +567,6 @@
                     "Circula con precaución y presta atención a los vehículos y peatones."
                 ]
             },
-
             seguridad: {
                 titulo: "🦺 Equipo de seguridad",
                 puntos: [
@@ -646,7 +576,6 @@
                     "No conduzcas un vehículo que represente un peligro."
                 ]
             },
-
             distancia: {
                 titulo: "↔️ Distancia entre vehículos",
                 puntos: [
@@ -656,7 +585,6 @@
                     "No conduzcas pegado a otros vehículos."
                 ]
             },
-
             lluvia: {
                 titulo: "🌧️ Conducir con lluvia",
                 puntos: [
@@ -728,6 +656,7 @@
             const nueva = {
                 folio: folio,
                 categoria: document.getElementById("categoria").value,
+                clasificacion: document.getElementById("clasificacion").value,
                 descripcion: document.getElementById("descripcion").value.trim(),
                 articulo: document.getElementById("articulo").value.trim(),
                 monto: Number(document.getElementById("monto").value),
@@ -753,8 +682,13 @@
             tabla.replaceChildren();
 
             const filtradas = infracciones.filter(item =>
-                [item.folio, item.categoria, item.descripcion, item.estado]
-                    .some(valor => valor.toLowerCase().includes(busqueda))
+                [
+                    item.folio,
+                    item.categoria,
+                    item.clasificacion,
+                    item.descripcion,
+                    item.estado
+                ].some(valor => valor.toLowerCase().includes(busqueda))
             );
 
             document.getElementById("contador").textContent =
@@ -764,7 +698,7 @@
             if (filtradas.length === 0) {
                 const fila = tabla.insertRow();
                 const celda = fila.insertCell();
-                celda.colSpan = 7;
+                celda.colSpan = 8;
                 celda.style.textAlign = "center";
                 celda.textContent = "No hay registros que mostrar.";
                 return;
@@ -776,6 +710,7 @@
                 [
                     item.folio,
                     item.categoria,
+                    item.clasificacion,
                     item.descripcion,
                     item.monto.toLocaleString("es-MX", {
                         style: "currency",
@@ -822,13 +757,20 @@
             }
 
             const encabezados = [
-                "Folio", "Categoría", "Descripción",
-                "Artículo", "Monto", "Fecha", "Estado"
+                "Folio",
+                "Categoría",
+                "Clasificación",
+                "Descripción",
+                "Artículo",
+                "Monto",
+                "Fecha",
+                "Estado"
             ];
 
             const filas = infracciones.map(item => [
                 item.folio,
                 item.categoria,
+                item.clasificacion,
                 item.descripcion,
                 item.articulo,
                 item.monto,
